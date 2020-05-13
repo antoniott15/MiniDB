@@ -150,16 +150,19 @@ func (e *Engine) createNewTable(name string, header []string) (*Table,error) {
 
 func (e *Engine) insertIntoTable(elem *Structure, tableName string)  error {
 	var table *Table
-	found := false
+	if !strings.Contains(tableName, "Tables") {
+		tableName = "./Tables/" + tableName
+	}
+		found := false
 	for _,elem := range e.TablesTree {
-		if elem.Name == tableName {
+		if "./" +elem.Name == tableName {
 			table = elem
 			found = true
 		}
 	}
 
 	if !found {
-		return keyNotFound
+		return tableNotFound
 	}
 
 	c,err := json.Marshal(elem)
@@ -181,7 +184,7 @@ func (e *Engine) insertIntoTable(elem *Structure, tableName string)  error {
 
 func Save(name string, elem interface{}) error {
 	if !strings.Contains(name, "Tables") {
-		name = "./Tables/"
+		name = "./Tables/" + name
 	}
 	file, err := os.OpenFile(name, os.O_CREATE|os.O_WRONLY|os.O_APPEND, os.ModeAppend)
 	if err != nil {
