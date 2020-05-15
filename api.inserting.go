@@ -18,14 +18,12 @@ func (api *API) createNewRecord(r *gin.RouterGroup) {
 			c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 			return
 		}
-
 		key, err := strconv.Atoi(fmt.Sprint(items["KEY"]))
 		if err != nil {
 			c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 			return
 		}
 		t := api.engine.getTableByName(table)
-		logrus.Info("Inserting element with key: ", key)
 		str := &Structure{
 			Key:     key,
 			Headers: t.Headers,

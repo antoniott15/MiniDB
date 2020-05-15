@@ -113,7 +113,7 @@ func getValueByHeaders(headers []string, line string) *Structure {
 }
 
 
-func (e *Engine) createNewTable(name string, header []string) (*Table,error) {
+func (e *Engine) createNewTable(name string, header []string) ([]*Table,error) {
 	name = "./Tables/" + strings.ToLower(name)
 	for _,elements := range e.Dirs {
 		if strings.Contains(elements, "./") {
@@ -140,48 +140,65 @@ func (e *Engine) createNewTable(name string, header []string) (*Table,error) {
 		return nil,err
 	}
 
-	var table = &Table{
+	table := &Table{
 		StructureKeys:       nil,
 		Name:       name,
 		Headers: header,
 		StructTree: tree,
 	}
-	e.TablesTree = append(e.TablesTree,table)
+
+	e.TablesTree = append(e.TablesTree, table)
 	e.Dirs = append(e.Dirs, name)
 	e.TotalDir += 1
-	return table, nil
+	log.Info("Table created correct ", name)
+	return e.TablesTree, nil
 }
 
 
 func (e *Engine) insertIntoTable(elem *Structure, tableName string)  error {
-	var table *Table
 	if !strings.Contains(tableName, "Tables") {
 		tableName = "./Tables/" + tableName
 	}
-		found := false
-	for _,elem := range e.TablesTree {
-		if "./" +elem.Name == tableName {
-			table = elem
-			found = true
+
+	for _,element := range e.TablesTree {
+		if  strings.Contains(element.Name, "./") {
+			if element.Name == tableName {
+				element.StructureKeys = append(element.StructureKeys, elem.Key)
+				element.Headers = elem.Headers
+				c,err := json.Marshal(elem)
+				if err != nil {
+					return err
+				}
+
+				if err := element.StructTree.Insert(elem.Key,c); err != nil{
+					return err
+				}
+
+				str := toFormat(*elem)
+				if err := Save(tableName,str); err != nil{
+					return err
+				}
+				return nil
+			}
+		}else{
+			if "./" + element.Name == tableName {
+				c,err := json.Marshal(elem)
+				if err != nil {
+					return err
+				}
+				element.StructureKeys = append(element.StructureKeys, elem.Key)
+				element.Headers = elem.Headers
+				if err := element.StructTree.Insert(elem.Key,c); err != nil{
+					return err
+				}
+				str := toFormat(*elem)
+				if err := Save(tableName,str); err != nil{
+					return err
+				}
+				return nil
+
+			}
 		}
-	}
-
-	if !found {
-		return tableNotFound
-	}
-
-	c,err := json.Marshal(elem)
-	if err != nil {
-		return err
-	}
-
-	if err := table.StructTree.Insert(elem.Key,c); err != nil{
-		return err
-	}
-
-	str := toFormat(*elem)
-	if err := Save(tableName,str); err != nil{
-		return err
 	}
 	return nil
 }
@@ -191,6 +208,7 @@ func Save(name string, elem interface{}) error {
 	if !strings.Contains(name, "Tables") {
 		name = "./Tables/" + name
 	}
+	fmt.Println(name)
 	file, err := os.OpenFile(name, os.O_CREATE|os.O_WRONLY|os.O_APPEND, os.ModeAppend)
 	if err != nil {
 		return  err
@@ -208,7 +226,7 @@ func Save(name string, elem interface{}) error {
 
 func (e *Engine) getTableByName(name string) *Table {
 	for _,elements := range e.TablesTree {
-		if elements.Name == "Tables/" +name {
+		if strings.Contains(elements.Name, name) {
 			return elements
 		}
 	}

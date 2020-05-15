@@ -115,13 +115,17 @@ const Quering = () => {
             desactiveBooleans(false)
             const insertQuery: Insert | undefined = insert(query.slice(1));
             if (insertQuery !== undefined) {
-                insertIntoTable(insertQuery).then((_) => { setInsertingRecord(true) }).catch(e => errorInserting(true));
+                insertIntoTable(insertQuery).then((_) => { setInsertingRecord(true) }).catch(e => {
+                    desactiveBooleans(false);
+                     errorInserting(true)});
             }
         } else if (query[0] === "create") {
             desactiveBooleans(false)
             const createQuery: Create | undefined = create(query.slice(1));
             if (createQuery !== undefined) {
-                createTable(createQuery).then((_) => { setCreatedTable(true) }).catch(e => setTableExist(true));
+                createTable(createQuery).then((_) => { setCreatedTable(true) }).catch(e => {
+                    desactiveBooleans(false);
+                    setTableExist(true)});
             }
         } else if (query[0] === "select") {
             desactiveBooleans(false)
@@ -136,7 +140,10 @@ const Quering = () => {
                         arr.push(elements.Attribs)
                     }
                     setBody(arr);
-                }).catch(e => errInSelecting(e))
+                }).catch(e => {
+                    desactiveBooleans(false);
+                    errInSelecting(true)
+                })
             }
         } else {
             setNotFound(true)
@@ -181,6 +188,7 @@ const Quering = () => {
         const values = query.findIndex((values) => values === "values");
         const table = query.slice(into + 1, values)[0];
         const records = removeParenthesis(query.slice(query.findIndex((values) => values === table) + 1, values)[0]);
+
         const value = removeParenthesis(query.slice(values)[1].split(";")[0]);
         if (value.length !== records.length) {
             setValuesNotEqual(true);
@@ -198,6 +206,7 @@ const Quering = () => {
             key: Number(Result.get("KEY")),
             values: Result,
         }
+
         return result;
     }
 

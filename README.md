@@ -30,6 +30,53 @@ En el siguiente proyecto se ha realizado un benchamarking entre ambos algoritmos
 
 ## Inserción
 
+ ![Inserción](public/insert.png)
+ 
+ Como se puede visualizar claramente en la siguiente imagen la indexación por B+tree nos mejora varias veces más el rendimiento en consultas de tipo write.
+ Los resultados fueron(ns):
+  
+ ![Inserción en Ns](public/tableI.png)
+ 
+ ## Búsqueda
+ 
+ ![Búsqueda](public/search.png)
+ 
+  Como se puede visualizar claramente en la siguiente imagen la indexación por B+tree nos mejora varias veces más el rendimiento en consultas de tipo read.
+   
+ ![Búsqueda en Ns](public/tableD.png)
+ 
+ ## Uso
+ 
+ Para poder ejecutar el proyecto primero ejecute el proyecto con:
+
+    - $ go build
+    
+ Seguidamente aparecerá en el root del archivo un binario llamado igual que el paquete que está en go mod por lo que tendra que ejecutarlo
+ 
+    - $ ./projectdb
+   
+ Para poder correr el client, debera entrar a la carpera llamada from usando
+
+    - $ cd front/
+    
+ Seguidamente instalar los módulos y dependencias de node, en este caso puedes usar yarn con:
+
+    - $ yarn
+ 
+ y lanzar el proyecto con
+ 
+    - $ yarn start
+    
+ Al finalizar tendrás el backend corriendo en el puerto 4200 y el cliente corriendo el puerto 3000
+ ustéd podra ejecutar consultas simples de inserción, creacion de tablas y busqueda por atributos en el cliente y se mostrará de manera amigable.
+ 
+ 
+    
+  
+
+
+
+ 
 
 
 

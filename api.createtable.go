@@ -15,14 +15,13 @@ func (api *API) createTable(r *gin.RouterGroup) {
 			c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 			return
 		}
-		logrus.Info(items)
 		if items["KEY"] == "" {
 			c.JSON(http.StatusInternalServerError, gin.H{"error": "Table need a key"})
 			return
 		}
 		var headers []string
 		for k, _ := range items {
-			if k != "table" {
+			if strings.ToUpper(k) != "TABLE" {
 				headers = append(headers,strings.ToUpper(k))
 			}
 		}
@@ -31,9 +30,10 @@ func (api *API) createTable(r *gin.RouterGroup) {
 			c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 			return
 		}
-		logrus.Infof("Create new table with name: %s", items["table"])
 
-		c.JSON(http.StatusOK, gin.H{"data": table.Headers})
+		logrus.Infof("Create new table with name: %s", items["TABLE"])
+
+		c.JSON(http.StatusOK, gin.H{"data": table})
 		return
 	})
 

@@ -49,7 +49,9 @@ export const Tables = () => {
             const newTables = new Array<String>();
             for (let elements of tables) {
                 const value = String(elements);
-                newTables.push(value.replace("Tables/", ""))
+                const tables = value.replace("Tables/", "");
+                console.log(tables)
+                newTables.push(tables)
             }
             setTables(newTables);
         }).catch((err) => {
@@ -64,14 +66,19 @@ export const Tables = () => {
             query: "select",
             attribs: ["*"]
         }
+
         selectToTable(selected).then((res) => {
+            setHeaders([]);
+            setBody([]);
             const data = res.data.data;
-            setHeaders(data[0].Headers);
-            var arr = new Array<any>();
-            for (const elements of data) {
-                arr.push(elements.Attribs)
+            if(data){
+                setHeaders(data[0].Headers);
+                var arr = new Array<any>();
+                for (const elements of data) {
+                    arr.push(elements.Attribs)
+                }
+                setBody(arr);
             }
-            setBody(arr);
         })
 
     }
@@ -84,7 +91,7 @@ export const Tables = () => {
                         <div className={classes.buttons}>
                             {
                                 tables.map((val) => {
-                                    return <Button color="secondary" size="large" onClick={() => TableClicked(val)}>{val}</Button>
+                                    return <Button color="secondary" size="large" onClick={() => TableClicked(val)}>{val.replace("./","")}</Button>
                                 })
                             }
                         </div>

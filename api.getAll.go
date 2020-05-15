@@ -66,8 +66,8 @@ func (api *API) GetAll(r *gin.RouterGroup) {
 			return
 		}
 
-
 		uTable := api.engine.getTableByName(table)
+
 		keys := uTable.StructureKeys
 		var records []*Record
 
@@ -88,7 +88,6 @@ func (api *API) GetAll(r *gin.RouterGroup) {
 			newStructs = append(newStructs, RemoveFilteredValues(elements, filters["data"]))
 		}
 
-		logrus.Infof("%s", newStructs)
 		c.JSON(http.StatusOK, gin.H{"data": newStructs})
 		return
 	})

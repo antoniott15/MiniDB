@@ -1,5 +1,7 @@
 package main
 
+import "github.com/sirupsen/logrus"
+
 func (t *BPlussTree) Insert(key int, value []byte) error {
 	var leaf *Node
 	t.len += 1
@@ -10,6 +12,7 @@ func (t *BPlussTree) Insert(key int, value []byte) error {
 	pointer := makeRecord(value)
 
 	if t.Root == nil {
+		logrus.Info("Inserting key: ", key)
 		return t.CreateNewBPTree(key, pointer)
 	}
 
@@ -19,10 +22,12 @@ func (t *BPlussTree) Insert(key int, value []byte) error {
 	}
 
 	if leaf.NumKeys < order-1 {
+		logrus.Info("Inserting key: ", key)
 		insertIntoLeaf(leaf, key, pointer)
 		return nil
 	}
 
+	logrus.Info("Inserting key: ", key)
 	return t.insertIntoLeafAfterSplitting(leaf, key, pointer)
 }
 
