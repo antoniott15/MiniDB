@@ -82,6 +82,9 @@ La interaccion de ambos tiene la sigueinte interfaz:
   - B+ tree es la manera más eficiente de indexar y guardar datos en memoria.
   - B+ tree es usado en la mayoría de base de datos como motor de indexación.
   - Random file es un metodo que si bien es cierto es más rápido de implementar, le performance que obtienes no es óptimo.
+  - B+ tree está diseñado para su uso en datos almacenados en disco duro.
+  - El B+ tree solo almacena registros, sus valores están en las hojas, es por eso que optimiza la búsqueda.
+  - Los nodos están unidos entre sí lo que optimiza la búsqueda.
 
 Podemos concluir que gracias al algoritmo usado para búsqueda e insercion de B+ tree este optimiza el tiempo de ejecucion. 
 
