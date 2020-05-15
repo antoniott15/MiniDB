@@ -1,6 +1,6 @@
 # MiniDb
 
-Proyecto universitario que usa implementacion de b+tree en disco y un pequeño approach de sql lang para crear, seleccionar e insertar a la base de datos.
+Proyecto universitario que usa implementación de b+tree en disco y un pequeño approach de sql lang para crear, seleccionar e insertar a la base de datos.
 ## Propósito
    Entender y aplicar los algoritmos de almacenamiento de archivos físicos y el acceso concurrente.
 
@@ -30,7 +30,7 @@ En el siguiente proyecto se ha realizado un benchamarking entre ambos algoritmos
 
 ## Inserción
 
- ![Inserción](public/insert.png)
+ ![Inserción](public/Insert.png)
  
  Como se puede visualizar claramente en la siguiente imagen la indexación por B+tree nos mejora varias veces más el rendimiento en consultas de tipo write.
  Los resultados fueron(ns):
