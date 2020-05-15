@@ -1,11 +1,8 @@
 package main
 
-import log "github.com/sirupsen/logrus"
-
 func (t *BPlussTree) Insert(key int, value []byte) error {
 	var leaf *Node
-	log.Infof("Inserting in %v", key)
-	t.len +=  1
+	t.len += 1
 	if _, err := t.Search(key); err == nil {
 		return keyExist
 	}
@@ -26,10 +23,8 @@ func (t *BPlussTree) Insert(key int, value []byte) error {
 		return nil
 	}
 
-
 	return t.insertIntoLeafAfterSplitting(leaf, key, pointer)
 }
-
 
 func (t *BPlussTree) insertIntoLeafAfterSplitting(leaf *Node, key int, pointer *Record) error {
 	var (
@@ -200,7 +195,6 @@ func insertIntoNode(n *Node, indexLeaf, key int, right *Node) {
 	n.Keys[indexLeaf] = key
 	n.NumKeys += 1
 }
-
 
 func (t *BPlussTree) insertIntoNewRoot(left *Node, key int, right *Node) error {
 	t.Root = makeNode()

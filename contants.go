@@ -1,7 +1,7 @@
 package main
 
 const (
-	defaultOrder = 100
+	defaultOrder = 10000
 	order        = defaultOrder
 	WorkingDir   = "./Tables"
 	PREFIX       = "/api"
