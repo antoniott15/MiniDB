@@ -46,13 +46,14 @@ const THEME = createMuiTheme({
 
 function App() {
   const classes = useStyles();
+
   return (
     <MuiThemeProvider theme={THEME}>
       <div className={classes.root}>
           <NavBar></NavBar>
           <Grid>
-            <Quering></Quering>
-            <Tables></Tables>
+            <Quering ></Quering>
+            <Tables ></Tables>
           </Grid>
       </div>
     </MuiThemeProvider>

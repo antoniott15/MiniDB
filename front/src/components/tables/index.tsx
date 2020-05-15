@@ -11,6 +11,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
+import {CounterContext} from "../Quering/index";
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -43,6 +44,7 @@ export const Tables = () => {
     const [headers, setHeaders] = useState<string[]>([]);
     const [body, setBody] = useState<any[]>([]);
 
+
     useEffect(() => {
         allTables().then((t) => {
             const tables = t.data.data;
@@ -50,14 +52,13 @@ export const Tables = () => {
             for (let elements of tables) {
                 const value = String(elements);
                 const tables = value.replace("Tables/", "");
-                console.log(tables)
                 newTables.push(tables)
             }
             setTables(newTables);
         }).catch((err) => {
             console.log(err)
         });
-    }, [])
+    }, [CounterContext])
 
 
     const TableClicked = (e: any) => {

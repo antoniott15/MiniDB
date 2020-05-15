@@ -13,6 +13,10 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import { createTable, insertIntoTable, selectToTable } from "../helpers/apicall";
+
+var counter = 0;
+export const CounterContext = React.createContext(counter);
+
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         root: {
@@ -79,6 +83,7 @@ const removeParenthesis = (q: string): string[] => {
 }
 
 
+
 const Quering = () => {
     const classes = useStyles();
     const [value, setValue] = useState<string>("")
@@ -94,6 +99,8 @@ const Quering = () => {
     const [errSelct, errInSelecting] = useState<boolean>(false);
     const [headers, setHeaders] = useState<string[]>([]);
     const [body, setBody] = useState<any[]>([]);
+
+   
 
     const desactiveBooleans = (t: boolean) => {
         setNotFound(t)
@@ -123,7 +130,11 @@ const Quering = () => {
             desactiveBooleans(false)
             const createQuery: Create | undefined = create(query.slice(1));
             if (createQuery !== undefined) {
-                createTable(createQuery).then((_) => { setCreatedTable(true) }).catch(e => {
+                createTable(createQuery).then((_) => { 
+                    setCreatedTable(true) 
+                    counter++;
+                }).catch(e => {
+                    console.log(e)
                     desactiveBooleans(false);
                     setTableExist(true)});
             }

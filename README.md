@@ -39,11 +39,11 @@ En el siguiente proyecto se ha realizado un benchamarking entre ambos algoritmos
  
  ## Búsqueda
  
- ![Búsqueda](public/search.png)
+ ![Búsqueda](public/chart.png)
  
   Como se puede visualizar claramente en la siguiente imagen la indexación por B+tree nos mejora varias veces más el rendimiento en consultas de tipo read.
    
- ![Búsqueda en Ns](public/tableD.png)
+ ![Búsqueda en Ns](public/tablaD.png)
  
  ## Uso
  
@@ -70,9 +70,28 @@ En el siguiente proyecto se ha realizado un benchamarking entre ambos algoritmos
  Al finalizar tendrás el backend corriendo en el puerto 4200 y el cliente corriendo el puerto 3000
  ustéd podra ejecutar consultas simples de inserción, creacion de tablas y busqueda por atributos en el cliente y se mostrará de manera amigable.
  
+La interaccion de ambos tiene la sigueinte interfaz:
+
+ ![client](public/client.png)
  
-    
-  
+ en esta podrás hacer consultas básicas, crear tablas y insertar datos en ellas.
+ 
+
+## Conlusión
+
+  - B+ tree es la manera más eficiente de indexar y guardar datos en memoria.
+  - B+ tree es usado en la mayoría de base de datos como motor de indexación.
+  - Random file es un metodo que si bien es cierto es más rápido de implementar, le performance que obtienes no es óptimo.
+
+Podemos concluir que gracias al algoritmo usado para búsqueda e insercion de B+ tree este optimiza el tiempo de ejecucion. 
+
+
+## Liberías externas
+
+  - React
+  - Material UI
+
+
 
 
 
