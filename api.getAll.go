@@ -56,4 +56,58 @@ func (api *API) GetAll(r *gin.RouterGroup) {
 
 	})
 
+
+	r.POST("/records-filtered/:table", func(c *gin.Context) {
+		table := c.Param("table")
+		var  filters map[string][]string
+
+		if err := c.ShouldBind(&filters); err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+			return
+		}
+
+
+		uTable := api.engine.getTableByName(table)
+		keys := uTable.StructureKeys
+		var records []*Record
+
+		for _, elements := range keys {
+			re, _ := uTable.StructTree.Search(elements)
+			records = append(records, re)
+		}
+
+		var Structs []*Structure
+		for _, elements := range records {
+			var Struct *Structure
+			_ = json.Unmarshal(elements.Value, &Struct)
+			Structs = append(Structs, Struct)
+		}
+
+		var newStructs []*Structure
+		for _,elements := range Structs {
+			newStructs = append(newStructs, RemoveFilteredValues(elements, filters["data"]))
+		}
+
+		logrus.Infof("%s", newStructs)
+		c.JSON(http.StatusOK, gin.H{"data": newStructs})
+		return
+	})
+}
+
+
+func RemoveFilteredValues(str *Structure,filter []string) *Structure{
+	if filter[0] != "*" {
+		newAtribs :=  make(map[string]interface{})
+		for _, elements := range filter {
+			newAtribs[elements] = str.Attribs[elements]
+		}
+
+		return &Structure{
+			Key:     str.Key,
+			Headers: filter,
+			Attribs: newAtribs,
+		}
+	}
+	return str
+
 }

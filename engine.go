@@ -116,7 +116,12 @@ func getValueByHeaders(headers []string, line string) *Structure {
 func (e *Engine) createNewTable(name string, header []string) (*Table,error) {
 	name = "./Tables/" + strings.ToLower(name)
 	for _,elements := range e.Dirs {
-		if "./"+elements == name {
+		if strings.Contains(elements, "./") {
+			elements = elements
+		}else{
+			elements = "./" + elements
+		}
+		if elements == name {
 			return nil, tableNameFound
 		}
 	}

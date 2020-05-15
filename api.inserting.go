@@ -37,9 +37,9 @@ func (api *API) createNewRecord(r *gin.RouterGroup) {
 		}
 		logrus.Infof("Saving new record: \n%+v\n", str)
 		c.JSON(http.StatusOK, gin.H{"data": gin.H{
-			"KEY": str.Key,
-			"HEADERS": str.Headers,
-			"RECORD": str.Attribs,
+			"key": str.Key,
+			"headers": str.Headers,
+			"record": str.Attribs,
 		}})
 		return
 	})

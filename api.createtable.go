@@ -15,7 +15,7 @@ func (api *API) createTable(r *gin.RouterGroup) {
 			c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 			return
 		}
-
+		logrus.Info(items)
 		if items["KEY"] == "" {
 			c.JSON(http.StatusInternalServerError, gin.H{"error": "Table need a key"})
 			return
@@ -26,7 +26,7 @@ func (api *API) createTable(r *gin.RouterGroup) {
 				headers = append(headers,strings.ToUpper(k))
 			}
 		}
-		table, err := api.engine.createNewTable(items["table"], headers)
+		table, err := api.engine.createNewTable(items["TABLE"], headers)
 		if err != nil {
 			c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 			return

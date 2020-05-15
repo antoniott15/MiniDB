@@ -1,6 +1,9 @@
 package main
 
-import "github.com/gin-gonic/gin"
+import (
+	"github.com/gin-contrib/cors"
+	"github.com/gin-gonic/gin"
+)
 
 type API struct {
 	e      *gin.Engine
@@ -24,6 +27,11 @@ func newDBAPI(prefix, port string) (*API, error) {
 }
 
 func (api *API) registerEndpoints() {
+
+	corsConf := cors.DefaultConfig()
+	corsConf.AllowAllOrigins = true
+	c := cors.New(corsConf)
+	api.e.Use(c)
 	r := api.e.Group(api.prefix)
 
 	api.createTable(r)
