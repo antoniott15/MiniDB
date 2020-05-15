@@ -1,5 +1,7 @@
 # MiniDb
 
+ ![logo](public/logo.png)
+
 Proyecto universitario que usa implementación de b+tree en disco y un pequeño approach de sql lang para crear, seleccionar e insertar a la base de datos.
 ## Propósito
    Entender y aplicar los algoritmos de almacenamiento de archivos físicos y el acceso concurrente.
@@ -13,8 +15,8 @@ Proyecto universitario que usa implementación de b+tree en disco y un pequeño 
 - Memoria principal: La memoria principal es uno de los componentes más importantes del ordenador. Se utiliza durante el tiempo de ejecucíon del programa y con la pérdida de fluido eléctrico se pierde la información. Un ejemplo para referirse a la memoria principal sería la Ramdon Access Memory (RAM). Además, el tiempo de acceso es independiente de la dirección.
 - Memoria secundaria: En la memoria secundaria se almacena data donde, a pesar de no existir fluido eléctrico, se conserva. Un ejemplo para refereirse a la memoria secundaria sería el Disco Duro (HDD) o Disco Sólido (SSD). Además, el tiempo de acceso es dependiente de la dirección.
 
-## Resultadoas esperados
-Se implemetará el b+ tree en disco y se hará un benchmarking vs random file para probar su efectividad al momento de indexar data. 
+## Resultados esperados
+Se implementará el B+tree en disco y se hará un benchmarking vs random file para probar su efectividad al momento de indexar data. 
 
 ## Técnicas implementadas
 
