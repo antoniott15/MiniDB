@@ -7,41 +7,52 @@ func main() {
 	}
 	api.Launch()
 
+	// TEST
+	// os.Remove("./Tables/test")
+	// f, err := os.OpenFile("./Tables/test", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+	// f.Write([]byte("KEY|APELLIDOS|CARRERA|MENSUALIDAD"))
+
 	// engine, err := NewEngine()
 	// if err != nil {
 	// 	panic(err)
 	// }
 
-	// var insertTime time.Duration
-	// const timesTo = 10
-	// for i := 0; i < timesTo; i++ {
-	// 	start := time.Now()
+	// const timesTo = 1000000
+	// for i := 0; i < timesTo-1; i++ {
 	// 	engine.insertIntoTable(&Structure{
 	// 		Key:     i,
 	// 		Headers: []string{"KEY", "APELLIDOS", "CARRERA", "MENSUALIDAD"},
 	// 		Attribs: map[string]interface{}{
 	// 			"KEY":         i,
 	// 			"APELLIDOS":   "asdas",
-	// 			"CARRER":      "ASDASD",
+	// 			"CARRERA":     "ASDASD",
 	// 			"MENSUALIDAD": "ASDADSADS",
 	// 		},
 	// 	}, "test")
-
-	// 	elapsed := time.Since(start)
-	// 	insertTime += elapsed
 	// }
 
-	// log.Printf("Search took %s",insertTime / timesTo)
+	// start := time.Now()
+	// engine.insertIntoTable(&Structure{
+	// 	Key:     timesTo,
+	// 	Headers: []string{"KEY", "APELLIDOS", "CARRERA", "MENSUALIDAD"},
+	// 	Attribs: map[string]interface{}{
+	// 		"KEY":         timesTo,
+	// 		"APELLIDOS":   "asdas",
+	// 		"CARRERA":     "ASDASD",
+	// 		"MENSUALIDAD": "ASDADSADS",
+	// 	},
+	// }, "test")
 
-	// var searchTime time.Duration
+	// elapsedInsert := time.Since(start)
+
+	// log.Printf("Insert took %s", elapsedInsert)
+
 	// t := engine.getTableByName("test")
-	// for i := 0; i < 10; i++ {
-	// 	startSearch := time.Now()
-	// 	t.StructTree.Search(i)
 
-	// 	elapsedSearch := time.Since(startSearch)
-	// 	searchTime += elapsedSearch
-	// }
-	// log.Printf("Search took %s", searchTime/timesTo)
+	// startSearch := time.Now()
+	// _, err = t.StructTree.Search(timesTo - 1000)
+	// elapsedSearch := time.Since(startSearch)
+
+	// log.Printf("Search took %s", elapsedSearch)
 
 }

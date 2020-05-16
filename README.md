@@ -33,15 +33,14 @@ En el siguiente proyecto se ha realizado un benchamarking entre ambos algoritmos
 ## Inserción
 
  ![Inserción](public/Insert.png)
- 
- Como se puede visualizar claramente en la siguiente imagen la indexación por B+tree nos mejora varias veces más el rendimiento en consultas de tipo write.
- Los resultados fueron(ns):
+ La inserción en random file se encuentra casi lineal ya que lo unico que hace es guardar en el ultimo espacio que puede mientras que en el B+ Tree hay un pre proceso.
+ Los resultados fueron(us):
   
  ![Inserción en Ns](public/tableI.png)
  
  ## Búsqueda
  
- ![Búsqueda](public/chart.png)
+ ![Búsqueda](public/Search.png)
  
   Como se puede visualizar claramente en la siguiente imagen la indexación por B+tree nos mejora varias veces más el rendimiento en consultas de tipo read.
    
